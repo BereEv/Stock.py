@@ -3,7 +3,9 @@ import pandas as pd
 
 
 a = pd.read_excel('log\\sku-list.xlsx')
+# убираем пробелы до и после названия 
 a = a.rename(columns=lambda x: x.strip())
+# считаем дубли
 a1 = a['Артикул'].value_counts().rename_axis('Артикул').reset_index(name='counter')
 a1 = a.join(a1.set_index('Артикул'), on='Артикул')
 a1 = a1.groupby(['Артикул', 'Штрихкод']).mean('counter').reset_index().fillna(value='n-a')
