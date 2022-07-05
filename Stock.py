@@ -12,12 +12,7 @@ import Curents
 from readSkuStock import Join_DFStock
 
 #  ключи кабинетов для Api Ozon
-headers_Ultra = {"Client-Id": "53484", "Api-Key": "07c6065d-a04f-4150-8a9c-e883275961e5"}
-headers_Lester = {"Client-Id": "3933", "Api-Key": "6d969891-d7c5-4845-b740-7260842dbd28"}
-headers_TopSale = {"Client-Id": "129321", "Api-Key": "57bf369a-7434-4e4e-8035-b9cf9c9ef7d1"}
-headers_RkRasha = {"Client-id": "227466", "Api-Key": "0fea6dc8-0bd2-4a70-86a8-fe09d5333897"}
-headers_Svell = {"Client-id": "22359", "Api-Key": "037df650-7701-4085-ba6e-19d367876578"}
-
+headers = {"Client-Id": "", "Api-Key": ""}
 
 #  Берем из сайта ЦБ.рф курсы евро
 Curents
@@ -139,16 +134,10 @@ def transaction(name_headers):
         pass
 
 
-dfs = (transaction(headers_Ultra),
-       transaction(headers_Lester),
-       transaction(headers_TopSale),
-       transaction(headers_RkRasha),
-       transaction(headers_Svell))
-pd.concat(dfs, keys=['transaction(headers_Ultra)',
-                     'transaction(headers_Lester)',
-                     'transaction(headers_TopSale)',
-                     'transaction(headers_RkRasha)',
-                     'transaction(headers_Svell)']).reset_index().drop(columns=['level_1']).to_excel('log/prod.xlsx')
+dfs = (transaction(headers)
+       
+pd.concat(dfs, keys=['transaction(headers)',
+                     ]).reset_index().drop(columns=['level_1']).to_excel('log/prod.xlsx')
 
 
 # noinspection PyArgumentList
@@ -183,7 +172,7 @@ def join_sales_product_STOCK():
                               'visibility_details.active_product', 'status.state', 'status.state_failed',
                               'status.state_name', 'status.state_description', 'status.is_failed', 'status.is_created',
                               'status.state_tooltip', 'status.item_errors', 'status.state_updated_at', 'variable'])
-    prod.to_excel('log/q1.xlsx', float_format='%.2f')
+    prod.to_excel('log/sales_and_product.xlsx', float_format='%.2f')
 
 
 join_sales_product_STOCK()
