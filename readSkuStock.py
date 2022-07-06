@@ -5,8 +5,8 @@ import warnings
 warnings.simplefilter('ignore')
 
 # noinspection PyArgumentList
-if 'main' == 'name':
-    'name'
+if __name__ == '__main__':
+    '__name__'
 
 #  Читаем файл себестоимости, апка на 6 - й строке
 def read_stock() -> [print('read Stock')]:
