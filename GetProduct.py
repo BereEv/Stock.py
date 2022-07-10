@@ -1,11 +1,7 @@
 import requests
 import pandas as pd
 
-headers_Ultra = {"Client-Id": "53484", "Api-Key": "07c6065d-a04f-4150-8a9c-e883275961e5"}
-headers_Lester = {"Client-Id": "3933", "Api-Key": "6d969891-d7c5-4845-b740-7260842dbd28"}
-headers_TopSale = {"Client-Id": "129321", "Api-Key": "57bf369a-7434-4e4e-8035-b9cf9c9ef7d1"}
-headers_RkRasha = {'Client-id': '227466', 'Api-Key': '0fea6dc8-0bd2-4a70-86a8-fe09d5333897'}
-headers_Svell = {'Client-id': '22359', 'Api-Key': '037df650-7701-4085-ba6e-19d367876578'}
+headers = {"": "", "Api-Key": ""}
 
 date_from = input('Введите начало периода ГГГГ-ММ-ДД    ') + "T00:00:00.000Z"
 date_to = input('Введите конец периода ГГГГ-ММ-ДД     ') + "T00:00:00.000Z"
@@ -61,13 +57,5 @@ def get_info_product(name_headers):
     print(r.status_code, r.content)
 
 
-dfs = (transaction(headers_Ultra),
-       transaction(headers_Lester),
-       transaction(headers_TopSale),
-       transaction(headers_RkRasha),
-       transaction(headers_Svell))
-pd.concat(dfs, keys=['transaction(headers_Ultra)',
-                     'transaction(headers_Lester)',
-                     'transaction(headers_TopSale)',
-                     'transaction(headers_RkRasha)',
-                     'transaction(headers_Svell)']).reset_index().drop(columns=['level_1']).to_excel('log/prod.xlsx')
+dfs = (transaction(headers))
+pd.concat(dfs, keys=['transaction(headers]).reset_index().drop(columns=['level_1']).to_excel('log/prod.xlsx')
